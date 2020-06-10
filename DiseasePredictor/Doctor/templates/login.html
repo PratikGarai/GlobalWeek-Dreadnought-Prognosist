@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Login In</title>
+	</head>
+	<body>
+		<h1>{{ message }}</h1>
+		<hr>
+		<form method="POST">
+			{% csrf_token %}
+			{% if not Correct %}
+				<div><p>Wrong password!</p></div>
+			{% endif %}
+			<label for="username">Username</label>
+			<input type="text" name="username"></input>
+			<label for="password">Password</label>
+			<input type="password" name="password"></input>
+			<input type="submit" value"SUBMIT"></input>
+		</form>
+	</body>
+</html>
