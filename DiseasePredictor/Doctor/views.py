@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from . import forms
+import requests
+import json
 
 def register(request):
 
@@ -13,24 +15,19 @@ def register(request):
         doctor_form = forms.Single_UserForm(data = request.POST)
         
         if user_form.is_valid() and doctor_form.is_valid():
-            user = user_form.save()
-            user.set_password(user.password)
-            user.save()
+
+            if validity(doctor_form.cleaned_data['official_name'], doctor_form.cleaned_data['mci_id'], doctor_form.cleaned_data['registration_year']):
+                user = user_form.save()
+                user.set_password(user.password)
+                user.save()
             
-            doctor = doctor_form.save(commit = False)
-            doctor.user = user
+                doctor = doctor_form.save(commit = False)
+                doctor.user = user
+                doctor.save()
+                registered = True
 
-            print(doctor_form)
-
-            # commented for now, some validity checker here
-            # if validity(doctor_form):
-            #     doctor.save()
-            #     registered = True
-            #     return render(request, "registration_success.html", {})
-            # for now, I make registered true for testing
-            doctor.save()
-            registered = True
-            return render(request, "message.html", {'message': "You have successfully registered", 'header': "Registration Success"})
+                return render(request, "message.html", {'message': "You have successfully registered", 'header': "Registration Success"})
+            return render(request, "message.html", {'message':"Your creditials did not match. Make sure you are registered in MCI", 'header': "Credentials Mismatch" })
         return render(request, "something_wrong.html",{}) 
     
     return render(request, "registration.html", {'User':forms.UserForm ,'Doctor':forms.Single_UserForm })
@@ -59,3 +56,14 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     return render(request, "login.html", { 'log' : forms.UserForm, 'Correct' : True, 'message': "You logged out"})
+
+
+#AUXILLIARY METHODS
+def validity(name , regno , year):
+    url = 'https://mciindia.org/MCIRest/open/getPaginatedData?service=getPaginatedDoctor&draw=1&columns%5B0%5D%5Bdata%5D=0&columns%5B0%5D%5Bname%5D=&columns%5B0%5D%5Bsearchable%5D=true&columns%5B0%5D%5Borderable%5D=true&columns%5B0%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B0%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B1%5D%5Bdata%5D=1&columns%5B1%5D%5Bname%5D=&columns%5B1%5D%5Bsearchable%5D=true&columns%5B1%5D%5Borderable%5D=true&columns%5B1%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B1%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B2%5D%5Bdata%5D=2&columns%5B2%5D%5Bname%5D=&columns%5B2%5D%5Bsearchable%5D=true&columns%5B2%5D%5Borderable%5D=true&columns%5B2%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B2%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B3%5D%5Bdata%5D=3&columns%5B3%5D%5Bname%5D=&columns%5B3%5D%5Bsearchable%5D=true&columns%5B3%5D%5Borderable%5D=true&columns%5B3%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B3%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B4%5D%5Bdata%5D=4&columns%5B4%5D%5Bname%5D=&columns%5B4%5D%5Bsearchable%5D=true&columns%5B4%5D%5Borderable%5D=true&columns%5B4%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B4%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B5%5D%5Bdata%5D=5&columns%5B5%5D%5Bname%5D=&columns%5B5%5D%5Bsearchable%5D=true&columns%5B5%5D%5Borderable%5D=true&columns%5B5%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B5%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B6%5D%5Bdata%5D=6&columns%5B6%5D%5Bname%5D=&columns%5B6%5D%5Bsearchable%5D=true&columns%5B6%5D%5Borderable%5D=true&columns%5B6%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B6%5D%5Bsearch%5D%5Bregex%5D=false&order%5B0%5D%5Bcolumn%5D=0&order%5B0%5D%5Bdir%5D=asc&start=0&length=500&search%5Bvalue%5D=&search%5Bregex%5D=false&name='+str(name)+'&registrationNo='+str(regno)+'&smcId=&year='+str(year)+'&_=1591867656238'
+    response  = requests.get(url)
+    vals = json.loads(response.content)
+    l = len(vals['data'])
+    if(l>0):
+        return True
+    return False
