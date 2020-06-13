@@ -7,4 +7,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.home_page),
     url('^Doctor/', include('Doctor.urls', namespace = 'Doctor')),
+    url('^Diseases/', include('Diseases.urls', namespace = 'Diseases')),
 ]
