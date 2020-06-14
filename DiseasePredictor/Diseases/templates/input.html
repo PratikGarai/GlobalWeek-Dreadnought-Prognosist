@@ -2,12 +2,20 @@
 <html>
 	<head>
 		<title>Input page</title>
+	<script type ="text/javascript" src="/media/js/jquery.js"></script>
+	<script type ="text/javascript" src="/media/js/dropper.js"></script>
 	</head>
 	<body>
 		<h2>This is the input page heading</h2>
 		<form method="POST">
+			{% csrf_token %}
 			{{ form.as_p }}
 			<input type="submit" value="SUBMIT"></input>
 		</form>
+		<div class="tray">
+			{% for i in symptoms %}
+			<button class ="disease">{{ i }}</button>
+			{% endfor %}
+		</div>
 	</body>
 </html>

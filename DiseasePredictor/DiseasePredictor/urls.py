@@ -9,3 +9,7 @@ urlpatterns = [
     url('^Doctor/', include('Doctor.urls', namespace = 'Doctor')),
     url('^Diseases/', include('Diseases.urls', namespace = 'Diseases')),
 ]
+
+from . import settings
+from django.contrib.staticfiles.urls import static
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
