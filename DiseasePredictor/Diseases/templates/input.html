@@ -13,19 +13,28 @@
 		</form>
 		<div class="main-div">
 			<div class = "section" id = "options" ondragover='allowDrop(event);' ondrop='drop2(event);'>
-			Here are the symptoms
-			{% for i in symptoms %}
-				<div id='{{ i }}' draggable='true' ondragstart='drag(event);'>
-					{{ i }}
-  				</div>
-			{% endfor %}
+				Here are the symptoms<br>
+				Common:
+				{% for i in common %}
+					<div id='{{ i }}' draggable='true' ondragstart='drag(event);'>
+						{{ i }}
+  					</div>
+				{% endfor %}
+				<hr>
+				Uncommon:
+				{% for i in uncommon %}
+					<div id='{{ i }}' draggable='true' ondragstart='drag(event);'>
+						{{ i }}
+	  				</div>
+				{% endfor %}
+				<hr>
 			</div>
 			<br><hr>
   			<div class = "section"  id = "selections"  ondragover='allowDrop(event);' ondrop='drop1(event);'> 
 				Drop your symptoms here(max. {{ length }}) 
 			</div>
 		</div>
-		<br><hr>
+		<br><hr><hr>
 		<button id = "submit">SUBMIT</button>
 	</body>
 </html>
