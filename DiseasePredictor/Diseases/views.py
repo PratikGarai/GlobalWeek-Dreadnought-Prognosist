@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from . import forms
 
-symptoms_list = ['symptom1','symptom2','symptom3','symptom4' ]
+symptoms_list = ['symptom1','symptom2','symptom3','symptom4','symptom5','symptom6','symptom7','symptom8' ]
 def input_view(request):
 
     if request.method=="POST":
@@ -13,7 +13,7 @@ def input_view(request):
         
         return render(request, "something_wrong.html", {})
     
-    return render(request, "input.html",{'form': forms.Symptom_Form, 'symptoms': symptoms_list})
+    return render(request, "input.html",{'form': forms.Symptom_Form, 'symptoms': symptoms_list, 'length':7})
 
 def ml(clean_data):
     print(clean_data)

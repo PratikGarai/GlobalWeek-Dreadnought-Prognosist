@@ -7,15 +7,25 @@
 	</head>
 	<body>
 		<h2>This is the input page heading</h2>
-		<form method="POST">
+		<form method="POST" id="target-form" hidden>
 			{% csrf_token %}
-			{{ form.as_p }}
-			<input type="submit" value="SUBMIT"></input>
+			{{ form }}
 		</form>
-		<div class="tray">
+		<div class="main-div">
+			<div class = "section" id = "options" ondragover='allowDrop(event);' ondrop='drop2(event);'>
+			Here are the symptoms
 			{% for i in symptoms %}
-			<button class ="disease">{{ i }}</button>
+				<div id='{{ i }}' draggable='true' ondragstart='drag(event);'>
+					{{ i }}
+  				</div>
 			{% endfor %}
+			</div>
+			<br><hr>
+  			<div class = "section"  id = "selections"  ondragover='allowDrop(event);' ondrop='drop1(event);'> 
+				Drop your symptoms here(max. {{ length }}) 
+			</div>
 		</div>
+		<br><hr>
+		<button id = "submit">SUBMIT</button>
 	</body>
 </html>
