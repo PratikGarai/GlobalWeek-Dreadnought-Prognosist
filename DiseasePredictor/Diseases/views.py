@@ -18,11 +18,11 @@ def input_view(request):
             disease_prediction = ml(symptoms_form.cleaned_data)
             print(symptoms_form.cleaned_data)
             if len(disease_prediction)==1:
-                return render(request, "result.html", {'multiple': 0, 'prognosis': disease_prediction})
+                return render(request, "result.html", {'multiple': 0, 'prognosis': disease_prediction[0][0]})
             else:
                 return render(request, "result.html", {'multiple': 1, 'prognosis': disease_prediction})
         
-        return render(request, "something_wrong.html", {})
+        return render(request, "something_wrong.html", {'message' : "Something went wrong!"})
     
     return render(request, "input.html",{'form': forms.Symptom_Form, 'common': common,'uncommon':uncommon, 'length':7})
 

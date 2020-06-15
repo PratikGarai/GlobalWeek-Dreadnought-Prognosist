@@ -4,18 +4,32 @@
     <meta charset="UTF-8">
     <title>Doctor's records</title>
     <style>
-                /* The switch - the box around the slider */
+          body{
+		  background-color: #1164b4;
+          }
+         .div1{
+         background-color:white;
+         margin: 20px;
+         margin-top: 50px ;
+         border-radius: 25px;
+         padding: 10px;
+         text-align: center;
+         box-shadow: 0px 5px 20px rgba(0,0,0,0.5);
+         font-family: 'Ubuntu',sans-serif;
+         }
         .switch {
           position: relative;
           display: inline-block;
           width: 35px;
           height: 24px;
-        }        /* Hide default HTML checkbox */
+        }
+        /* Hide default HTML checkbox */
         .switch input {
           opacity: 0;
           width: 0;
           height: 0;
-        }        /* The slider */
+        }
+        /* The slider */
         .slider {
           position: absolute;
           cursor: pointer;
@@ -26,7 +40,8 @@
           background-color: #ccc;
           -webkit-transition: .4s;
           transition: .4s;
-        }        .slider:before {
+        }
+        .slider:before {
           position: absolute;
           content: "";
           height: 15px;
@@ -36,67 +51,77 @@
           background-color: white;
           -webkit-transition: .4s;
           transition: .4s;
-        }        input:checked + .slider {
+        }
+        input:checked + .slider {
           background-color: #2196F3;
-        }        input:focus + .slider {
+        }
+        input:focus + .slider {
           box-shadow: 0 0 1px #2196F3;
-        }        input:checked + .slider:before {
+        }
+        input:checked + .slider:before {
           -webkit-transform: translateX(13px);
           -ms-transform: translateX(13px);
           transform: translateX(13px);
-        }        /* Rounded sliders */
+        }
+        /* Rounded sliders */
         .slider.round {
           border-radius: 10px;
-        }        .slider.round:before {
+        }
+        .slider.round:before {
           border-radius: 50%;
         }
         .column {
         display : inline-block;
         }
+        
     </style>
 </head>
 <body>
-    {% include "menu-template.html" %}
-    <p>This is input page for doctors:</p>
-    <form method="POST">
-	{% csrf_token %}
-        <p>Age: &nbsp &nbsp <input type="number" name="age"/></p>
-        <div align="center">
-        <p>Symptoms</p>
-            <div class="column" align="left">
-                {% for i in list_1%}
-                <p> {{i}}
-                <label class="switch">
-			<input id='{{i}}' name="{{i}}" type="checkbox">
-                  <span class="slider round"></span>
-                </label>
-                </p>
-                {% endfor %}
-            </div>
-            <div class="column" align="left">
-                {% for i in  list_2%}
-                <p> {{i}}
-                <label class="switch">
-			<input id='{{i}}' name="{{i}}" type="checkbox">
-                  <span class="slider round"></span>
-                </label>
-                </p>
-                {% endfor %}
-            </div>
-            <div class="column" align="left">
-                {% for i in list_3%}
-                <p> {{i}}
-                <label class="switch">
-			<input id='{{i}}' name={{i}} type="checkbox">
-                  <span class="slider round"></span>
-                </label>
-                </p>
-                {% endfor %}
-            </div>
-            </div>
-        <p>Diagnosis</p>
-        <input text="text" id="Diagnosis" name="Diagnosis">
-	<input type="submit" value="SUBMIT">
-    </form>
-</body>
+	{% include "menu-template.html" %}
+    <div class="div1">
+            <h1>Form</h1>
+            <h3 align="left">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                Fill up the form and submit it:</h3>
+	    <form method="POST">
+		    {% csrf_token %}
+        <p><b>Age: &nbsp &nbsp <input type="number"/></b></p>
+            <div align="center">
+            <p style="font-size:20px;"><b>Symptoms</b></p>
+                <div class="column" align="left">
+                    {% for i in list_1%}
+                    <p> {{i}}
+                    <label class="switch">
+                      <input id='{{i}}' type="checkbox">
+                      <span class="slider round"></span>
+                    </label>
+                    </p>
+                    {% endfor %}
+                </div>
+                <div class="column" align="left">
+                    {% for i in  list_2%}
+                    <p> {{i}}
+                    <label class="switch">
+                      <input id='{{i}}' type="checkbox">
+                      <span class="slider round"></span>
+                    </label>
+                    </p>
+                    {% endfor %}
+                </div>
+                <div class="column" align="left">
+                    {% for i in list_3%}
+                    <p> {{i}}
+                    <label class="switch">
+                      <input id='{{i}}' type="checkbox">
+                      <span class="slider round"></span>
+                    </label>
+                    </p>
+                    {% endfor %}
+                </div>
+                </div>
+            <p><b>Diagnosis :
+                <input text="text" id="Diagnosis" required></b></p>
+        <input type="submit" class="button1" value="Submit">
+        </form>    </div></body>
 </html>

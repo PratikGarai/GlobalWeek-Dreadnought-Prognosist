@@ -32,9 +32,9 @@ def register(request):
                 doctor.save()
                 registered = True
 
-                return render(request, "message.html", {'message': "You have successfully registered", 'header': "Registration Success"})
-            return render(request, "message.html", {'message':"Your creditials did not match. Make sure you are registered in MCI", 'header': "Credentials Mismatch" })
-        return render(request, "something_wrong.html",{}) 
+                return render(request, "something_wrong.html", {'message': "You have successfully registered", 'heading': "Registration Success", 'title':'Success'})
+            return render(request, "something_wrong.html", {'message':"Your creditials did not match. Make sure you are registered in MCI", 'heading': "Credentials Mismatch", 'title':'Error' })
+        return render(request, "something_wrong.html",{'title':'Error', 'message':'Make sure you don\'t alter the structure of the form', 'heading':'Something went wrong'}) 
     
     return render(request, "registration.html", {'User':forms.UserForm ,'Doctor':forms.Single_UserForm })
 
@@ -51,10 +51,10 @@ def login_user(request):
             if user:
                 if user.is_active:
                     login(request, user)
-                    return render(request, "message.html", {'message': "You have Successfully logged in!", 'header': "Login Succes"})
+                    return render(request, "something_wrong.html", {'message': "You have Successfully logged in!", 'header': "Login Succes", 'title':"Success!"})
                 return render(request, "login.html", {'log' :forms.UserForm,  'message': "Your account is Inactive!"})
             return render(request, "login.html", {'log': forms.UserForm, 'message':'Wrong Credentials'})
-        return render(request, "something_wrong.html",{}) 
+        return render(request, "something_wrong.html",{'title':'Error', 'heading': 'Something went wrong', 'message':''}) 
 
     return render(request, "login.html", { 'log' : forms.UserForm , 'correct':1,  'message' : ""})
 
@@ -77,11 +77,9 @@ def validity(name , regno , year):
 @login_required
 def add_disease(request):
     if request.method =="POST":
-        handle(request.POST)
+        return render(request, "something_wrong.html", {'title':"Accepted", 'message': 'Your request will be reviewed soon!', 'heading':"Thank you!" }) 
     
     list_main = sorted(list(symptoms.keys()))
     l = len(list_main)
     return render(request, "data_adder.html", {'list_1':list_main[0::3] , 'list_2':list_main[1::3] ,'list_3':list_main[2::3] })
 
-def handle(dictionary):
-    pass 

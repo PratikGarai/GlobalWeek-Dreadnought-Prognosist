@@ -1,11 +1,28 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Oops!</title>
-	</head>
-	<body>
-		{% include "menu-template.html" %}
-		<h1>Something went wrong...</h1><br>
-		<h3> Make sure you don't tamper with the parts of the form</h3>
-	</body>
+   <head>
+	   <title>{{ title }}</title>
+      <style>
+            body{
+		    background-color: #1164b4;
+            }
+          .div1{
+          background-color:white;
+          margin: 20px;
+          margin-right: 5px;
+          margin-top: 50px ;
+          border-radius: 25px;
+          padding: 10px;
+          text-align: center;
+          box-shadow: 0px 5px 20px rgba(0,0,0,0.5);
+          font-family: 'Ubuntu', sans-serif;
+          }      </style>
+   </head>
+   <body>
+	   {% include "menu-template.html" %}
+      <div class="div1">
+	      <h1>{{ heading }}</h1>
+	      <p>{{ message }}</p>
+        </div>
+   </body>
 </html>

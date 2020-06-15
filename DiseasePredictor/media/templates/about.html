@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>About</title>
+      <style>
+            body{
+            background-color: #1164b4;
+            }
+          .div1{
+          background-color:white;
+          margin: 20px;
+          margin-right: 5px;
+          margin-top: 50px ;
+          border-radius: 25px;
+          padding: 30px;
+          text-align: center;
+          font-size:20px;
+          box-shadow: 0px 5px 20px rgba(0,0,0,0.5);
+          font-family: 'Ubuntu', sans-serif;
+          }    
+      ul.about{
+      	align : left;
+	text-align : left;
+      }
+      </style>
+   </head>
+   <body>
+	   {% include "menu-template.html" %}
+      <div class="div1">
+            <h1>About</h1>
+            <br>
+            <p align="left">Hi,Welcome to Prognosist!</p>
+            <p align="left">Prognosis is a web application that uses machine learning algorithms to identify patterns in the dataset and predict a disease. Users can input symptoms and the system predicts accurately.
+                We have also tried to improve the dataset by allowing doctors to add data to the dataset. Our system can mainly be used if the doctors are unable to predict a disease. We believe that our application
+                can help in significantly improving the accuracy and speed of diagnosis.  </p>
+            <p align="left"> Currently the application is in <b>beta</b> stage. In the upcoming updates we will try to improve analysis to try and predict if there is an outbreak. With a lot of input from doctors, we believe
+                our application can easily detect increase in certain symptoms and prevent an outbreak like another COVID. </p>
+            <p align="left"><b>Developed by:</b></p>
+            <ul class="about"  align="left">
+                <li>Pratik Garai</li>
+                <li>Jerry George Jaimon</li>
+                <li>Shubh Prachauri</li>
+                <li>Surya.S</li>
+            </ul>
+            <p align="left"><b>Dataset used:</b> &nbsp
+            <a href="https://www.kaggle.com/rabisingh/symptom-checker">https://www.kaggle.com/rabisingh/symptom-checker</a>
+            </p>
+            <p align="left"><b>Image used:</b> &nbsp
+	    <a href="https://www.freepik.com/free-photos-vectors/medical">Medical photo created by freepik - www.freepik.com</a>
+            </p>
+	    <p align="left"><b>Libraries/Frameworks Used:</b></p>
+            <ul class="about"  align="left">
+                <li>Django (Python)</li>
+                <li>Sklearn (Python)</li>
+                <li>Argon2 (Python)</li>
+                <li>Requests (Python)</li>
+                <li>Json (Python)</li>
+                <li>Pickle (Python)</li>
+                <li>jQuery (JavaScript)</li>
+            </ul>
+        </div>
+   </body>
+</html>
