@@ -1,7 +1,7 @@
 var max_n = 7;
 $(document).ready(function(){
    $("#submit").click(function(event){
-      var box = $(".main-div div#selections div");
+      var box = $("div#selections div");
       var inputs = $("input.field");
       for( var i=0;i<box.length;i++)
       {

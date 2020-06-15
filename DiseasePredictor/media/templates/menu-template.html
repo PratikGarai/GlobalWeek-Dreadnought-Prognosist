@@ -1,3 +1,44 @@
-<nav>
-	<li><a href="/">Home Button</a></li>
-</nav>
+<style>
+.nav{
+background-color:white;
+margin: 20px;
+margin-top: 50px ;
+border-radius: 25px;
+padding: 10px;
+text-align: center;
+word-spacing: 40px;
+box-shadow: 0px 5px 20px rgba(0,0,0,0.5);
+font-family: 'Ubuntu', sans-serif;
+}
+a:link{
+        text-decoration: none;
+        color:blue;
+}
+a:visited{
+        text-decoration: none;
+        color:blue;
+}
+a:hover{
+        color:black;
+}
+.l1{
+            display: inline;
+}
+</style>
+<div class="nav noDrop">
+   <nav>
+              <ul>
+              <li class="l1"><a href="/">Home</a></li>
+	      <li class="l1"><a href='{% url "Diseases:Input" %}'>Prognosis</a></li>
+	      <li class="l1"><a href='{% url "MainApp:About" %}'>About</a></li>
+	      	{% if user.is_authenticated %}
+		<li class="l1"><a href = '{% url "Doctor:Adder" %}'>Observation</a></li>
+	  	<li class="l1"><a href = '{% url "Doctor:Logout" %}'>Logout</a></li>
+		{% else %}
+		<li class="l1"><a href = '{% url "Doctor:Login" %}'>Login</a></li>
+	      	<li class="l1"><a href = '{% url "Doctor:Registration" %}'>Register</a></li>
+		{% endif %}
+
+              </ul>
+  </nav>
+</div>

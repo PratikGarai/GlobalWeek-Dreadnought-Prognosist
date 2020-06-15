@@ -4,6 +4,12 @@ from django.contrib.auth.decorators import login_required
 from . import forms
 import requests
 import json
+import pickle
+import os
+from DiseasePredictor import settings
+
+BASE_DIR = settings.BASE_DIR
+symptoms = pickle.load(open(os.path.join(BASE_DIR, "media", "data", "all_ordered.p"), "rb")) 
 
 def register(request):
 
@@ -46,16 +52,16 @@ def login_user(request):
                 if user.is_active:
                     login(request, user)
                     return render(request, "message.html", {'message': "You have Successfully logged in!", 'header': "Login Succes"})
-                return render(request, "message.html", {'message': "Your account is Inactive!", 'header': "Inactive"})
-            return render(request, "login.html", {'log': forms.UserForm, 'Correct': False , 'message':''})
+                return render(request, "login.html", {'log' :forms.UserForm,  'message': "Your account is Inactive!"})
+            return render(request, "login.html", {'log': forms.UserForm, 'message':'Wrong Credentials'})
         return render(request, "something_wrong.html",{}) 
 
-    return render(request, "login.html", { 'log' : forms.UserForm , 'Correct' : True, 'message' : "Fill the form to Login"})
+    return render(request, "login.html", { 'log' : forms.UserForm , 'correct':1,  'message' : ""})
 
 @login_required
 def logout_user(request):
     logout(request)
-    return render(request, "login.html", { 'log' : forms.UserForm, 'Correct' : True, 'message': "You logged out"})
+    return render(request, "login.html", { 'log' : forms.UserForm, 'message': "You logged out"})
 
 
 #AUXILLIARY METHODS
@@ -71,6 +77,11 @@ def validity(name , regno , year):
 @login_required
 def add_disease(request):
     if request.method =="POST":
-        print (request.POST)
+        handle(request.POST)
+    
+    list_main = sorted(list(symptoms.keys()))
+    l = len(list_main)
+    return render(request, "data_adder.html", {'list_1':list_main[0::3] , 'list_2':list_main[1::3] ,'list_3':list_main[2::3] })
 
-    return render(request, "data_adder.html", {'list_1':['a1'] , 'list_2':['a2'] ,'list_3':['a3'] })
+def handle(dictionary):
+    pass 

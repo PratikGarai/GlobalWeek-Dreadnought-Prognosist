@@ -8,6 +8,7 @@ urlpatterns = [
     path('',views.home_page),
     url('^Doctor/', include('Doctor.urls', namespace = 'Doctor')),
     url('^Diseases/', include('Diseases.urls', namespace = 'Diseases')),
+    url('^Main/', include('MainApp.urls', namespace = 'MainApp')),
 ]
 
 from . import settings

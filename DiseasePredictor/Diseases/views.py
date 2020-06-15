@@ -16,8 +16,9 @@ def input_view(request):
         symptoms_form = forms.Symptom_Form(data = request.POST)
         if symptoms_form.is_valid():
             disease_prediction = ml(symptoms_form.cleaned_data)
+            print(symptoms_form.cleaned_data)
             if len(disease_prediction)==1:
-                return render(request, "result.html", {'multiple': 0, 'prognosis': disease_prediction[0][0][0]})
+                return render(request, "result.html", {'multiple': 0, 'prognosis': disease_prediction})
             else:
                 return render(request, "result.html", {'multiple': 1, 'prognosis': disease_prediction})
         
@@ -43,14 +44,15 @@ def ml(clean_data):
     with open('media/models/label_coder.sav', 'rb') as fp:
         label_coder = pickle.load(fp)
     ls = []
-    threshold = 10
+    threshold = 15
 
     result = model.predict_proba([test_list])
     for i in range(0,len(result[0])):
         if result[0][i]!=0:
             ls.append((label_coder.inverse_transform([i,]),(result[0][i]*100)))
-    
+
+    ls = sorted([ (i[0][0],int(i[1])) for i in ls if i[1]>=threshold ] , reverse=True, key=lambda x: x[1])
     if ls[0][1]<threshold:
-        return [ls[0]]
+        return ls[0]
     else:
-        return sorted([ (i[0][0],i[1]) for i in ls if i[1]>=threshold ] , reverse=True, key=lambda x: x[1])
+        return ls
