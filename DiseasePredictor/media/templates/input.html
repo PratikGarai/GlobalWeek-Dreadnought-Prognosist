@@ -6,6 +6,7 @@
 	<script type ="text/javascript" src="/media/js/dropper.js"></script>
 	</head>
 	<body>
+		{% include "menu-template.html" %}
 		<h2>This is the input page heading</h2>
 		<form method="POST" id="target-form" hidden>
 			{% csrf_token %}
