@@ -4,6 +4,14 @@
 		<title>Input page</title>
 	<script type ="text/javascript" src="/media/js/jquery.js"></script>
 	<script type ="text/javascript" src="/media/js/dropper.js"></script>
+		<style>
+		#common,#uncommon{
+		padding:16px;
+		border-radius:8px;
+		}
+			.redbg{background-color:"#ff7675";}
+			.greenbg{background-color:"#55efc4";
+		</style>
 	</head>
 	<body>
 		{% include "menu-template.html" %}
@@ -16,18 +24,22 @@
 			<div class = "section" id = "options" ondragover='allowDrop(event);' ondrop='drop2(event);'>
 				Here are the symptoms<br>
 				Common:
+				<div id="common" class="greenbg">
 				{% for i in common %}
 					<div id='{{ i }}' class = "noDrop" draggable='true' ondragstart='drag(event);'>
 						{{ i }}
   					</div>
 				{% endfor %}
+				</div>
 				<hr>
 				Uncommon:
+				<div id="uncommon" class="redbg">
 				{% for i in uncommon %}
 					<div id='{{ i }}' class ="noDrop"  draggable='true' ondragstart='drag(event);'>
 						{{ i }}
 	  				</div>
 				{% endfor %}
+				</div>
 				<hr>
 			</div>
 			<br><hr>
