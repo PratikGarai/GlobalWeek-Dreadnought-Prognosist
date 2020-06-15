@@ -67,3 +67,10 @@ def validity(name , regno , year):
     if(l>0):
         return True
     return False
+
+@login_required
+def add_disease(request):
+    if request.method =="POST":
+        print (request.POST)
+
+    return render(request, "data_adder.html", {'list_1':['a1'] , 'list_2':['a2'] ,'list_3':['a3'] })

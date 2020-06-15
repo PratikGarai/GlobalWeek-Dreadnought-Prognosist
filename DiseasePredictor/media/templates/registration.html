@@ -1,17 +1,184 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Registration Form</title>
-	</head>
-	<body>
-		{% include "menu-template.html" %}
-		The Registration Form:<br><br>
-		<form method="POST">
-			{% csrf_token %}
-			{{ User.as_p }}
-			<hr>
-			{{ Doctor.as_p }}
-			<input type="submit" value="SUBMIT" ></input>
-		</form>
-	</body>
+    <head>
+        <title>Input page</title>
+      <script type ="text/javascript" src="/media/js/jquery.js"></script>
+      <script type ="text/javascript" src="/media/js/dropper.js"></script>
+      <style>
+            .mbody {
+            margin:0;
+            padding:0;
+            background-image:url("https://new-img.patrika.com/upload/2019/12/11/0_doctor-and-patient-taking-notes-in-surgery_5702073_835x547-m.jpg");            background-size: cover;
+            background-position-x: left;
+            background-position: left;
+            font-family: 'Ubuntu', sans-serif;
+            }            .main {
+            background-color: #ffffffd5;
+            width: 400px;
+            height: 800px;
+            margin: 7em auto;
+            border-radius: 1.5em;
+            box-shadow: 0px 11px 35px 2px rgba(138, 255, 102, 0.986);
+            }            .sign {
+            padding-top: 40px;
+            color: #27aaca;
+            font-family: 'Ubuntu', sans-serif;
+            font-weight: bold;
+            font-size: 23px;
+            }            .a {
+            width: 76%;
+            color: rgb(59, 178, 238);
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 1px;
+            background: rgba(255, 255, 255, 0.925);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            outline: none;
+            box-sizing: border-box;
+            border: 2px solid rgb(47, 177, 236);
+            margin-bottom: 50px;
+            margin-left: 46px;
+            text-align: center;
+            margin-bottom: 27px;
+            font-family: 'Ubuntu', sans-serif;
+            }            form.form1 {
+            padding-top: 40px;
+            }            .b {
+            width: 76%;
+            color: rgb(59, 178, 238);
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 1px;
+            background: rgb(249, 252, 252);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            outline: none;
+            box-sizing: border-box;
+            border: 2px solid rgba(73, 173, 255, 0.986);
+            margin-bottom: 50px;
+            margin-left: 46px;
+            text-align: center;
+            margin-bottom: 27px;
+            font-family: 'Ubuntu', sans-serif;            }            .c {
+            width: 76%;
+            color: rgb(59, 178, 238);
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 1px;
+            background: rgba(242, 246, 248, 0.993);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            outline: none;
+            box-sizing: border-box;
+            border: 2px solid rgb(77, 169, 255);
+            margin-bottom: 50px;
+            margin-left: 46px;
+            text-align: center;
+            margin-bottom: 27px;
+            font-family: 'Ubuntu', sans-serif;
+            }
+            .d{
+            width: 76%;
+            color: rgb(59, 178, 238);
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 1px;
+            background: rgba(255, 255, 255, 0.925);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            outline: none;
+            box-sizing: border-box;
+            border: 2px solid rgba(103, 221, 80, 0.925);
+            margin-bottom: 50px;
+            margin-left: 46px;
+            text-align: center;
+            margin-bottom: 27px;
+            font-family: 'Ubuntu', sans-serif;
+            }
+            .e {
+            width: 76%;
+            color: rgb(59, 178, 238);
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 1px;
+            background: rgba(253, 253, 253, 0.925);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            outline: none;
+            box-sizing: border-box;
+            border: 2px solid rgba(150, 243, 89, 0.979);
+            margin-bottom: 50px;
+            margin-left: 46px;
+            text-align: center;
+            margin-bottom: 27px;
+            font-family: 'Ubuntu', sans-serif;
+            }
+            .f {
+            width: 76%;
+            color: rgb(59, 178, 238);
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 1px;
+            background: rgba(255, 255, 255, 0.925);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            outline: none;
+            box-sizing: border-box;
+            border: 2px solid rgba(99, 243, 94, 0.966);
+            margin-bottom: 50px;
+            margin-left: 46px;
+            text-align: center;
+            margin-bottom: 27px;
+            font-family: 'Ubuntu', sans-serif;
+            }
+            .un:focus, .pass:focus {
+            border: 2px solid rgba(0, 0, 0, 0.18) !important;            }
+            .submit {
+            cursor: pointer;
+            border-radius: 5em;
+            color: #fff;
+            background: linear-gradient(to right, #75e96a, #07da07);
+            border: 0;
+            padding-left: 40px;
+            padding-right: 40px;
+            padding-bottom: 10px;
+            padding-top: 10px;
+            font-family: 'Ubuntu', sans-serif;
+            margin-left: 35%;
+            font-size: 13px;
+            box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+            }
+            a {
+            text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+            color: #E1BEE7;
+            text-decoration: none
+            }            @media (max-width: 600px) {
+            .main {
+            border-radius: 0px;
+            }
+      </style>
+    </head>    
+    <body>
+	    {% include "menu-template.html" %}
+        <div class="main">
+          <p class="sign" align="center">REGISTRATION FORM</p>
+          <form class="form1" method="POST">
+		  {% csrf_token %}
+            <input class="a " name = "username" type="text" align="center" placeholder="USER NAME">
+            <input class="b " name = "password" type="password" align="center" placeholder="PASSWORD ">
+            <input class="c " name = "email" type="email" align="center" placeholder="ENTER YOUR EMAIL ADDRESS ">
+            <input class="d " name = "official_name" type="text" align="center" placeholder="OFFICIAL NAME ">
+            <input class="e " name = "mci_id" type="number" align="center" placeholder="MCI ID ">
+            <input class="f " name = "registration_year" type="year" align="center" placeholder="REGISTRATION YEAR(YYYY) ">            
+	    <input type = "submit" class="submit" align="center" value="SUBMIT"></a>
+          </form>
+          </div>      
+    </body>      
 </html>
