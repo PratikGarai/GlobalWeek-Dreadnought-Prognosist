@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Predictions</title>
+	</head>
+	<body>
+		{% if multiple %}
+		Multiple prognosis detected<br><br>
+		<table id="multiResult">
+			<thead>
+				<td>Prognosis</td>
+				<td>Percentage(%)</td>
+			</thead>
+			<tbody>
+				{% for i,j in prognosis %}
+				<tr>
+					<td>{{ i }}</td>
+					<td>{{ j }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<br>
+		**rest of the results ommited due to low probability
+		{% else %}
+		<span id="singleResult">
+		The predicted progosis is  : {{ prognosis }}
+		</span>
+		{% endif %}
+		<hr>
+		**this prediction has been made by a machine learning model pre trained on a dataset and the progosis made is not confirmatory
+	</body>
+</html>

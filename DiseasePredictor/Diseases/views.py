@@ -12,11 +12,17 @@ def input_view(request):
         symptoms_form = forms.Symptom_Form(data = request.POST)
         if symptoms_form.is_valid():
             disease_prediction = ml(symptoms_form.cleaned_data)
-            return render(request, "message.html", {'message': disease_prediction, 'header': "Results"})
+            if len(disease_prediction)==1:
+                return render(request, "result.html", {'multiple': 0, 'prognosis': disease_prediction[0][0][0]})
+            else:
+                return render(request, "result.html", {'multiple': 1, 'prognosis': disease_prediction})
         
         return render(request, "something_wrong.html", {})
     
     return render(request, "input.html",{'form': forms.Symptom_Form, 'common': common,'uncommon':uncommon, 'length':7})
+
+
+
 
 def ml(clean_data):
     values_1 = [ i for i in clean_data.values() ]
@@ -32,6 +38,15 @@ def ml(clean_data):
         model = pickle.load(fp)
     with open('media/models/label_coder.sav', 'rb') as fp:
         label_coder = pickle.load(fp)
-    result = model.predict([test_list])
-    result = label_coder.inverse_transform(result)
-    return result[0]
+    ls = []
+    threshold = 10
+
+    result = model.predict_proba([test_list])
+    for i in range(0,len(result[0])):
+        if result[0][i]!=0:
+            ls.append((label_coder.inverse_transform([i,]),(result[0][i]*100)))
+    
+    if ls[0][1]<threshold:
+        return [ls[0]]
+    else:
+        return sorted([ (i[0][0],i[1]) for i in ls if i[1]>=threshold ] , reverse=True, key=lambda x: x[1])
