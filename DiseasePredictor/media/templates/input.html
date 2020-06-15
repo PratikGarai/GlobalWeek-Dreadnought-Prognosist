@@ -16,14 +16,14 @@
 				Here are the symptoms<br>
 				Common:
 				{% for i in common %}
-					<div id='{{ i }}' draggable='true' ondragstart='drag(event);'>
+					<div id='{{ i }}' class = "noDrop" draggable='true' ondragstart='drag(event);'>
 						{{ i }}
   					</div>
 				{% endfor %}
 				<hr>
 				Uncommon:
 				{% for i in uncommon %}
-					<div id='{{ i }}' draggable='true' ondragstart='drag(event);'>
+					<div id='{{ i }}' class ="noDrop"  draggable='true' ondragstart='drag(event);'>
 						{{ i }}
 	  				</div>
 				{% endfor %}
