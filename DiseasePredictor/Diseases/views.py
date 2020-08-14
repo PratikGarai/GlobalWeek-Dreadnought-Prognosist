@@ -39,9 +39,11 @@ def ml(clean_data):
     
     model = None
     label_coder = None
-    with open('media/models/model_rf.sav', 'rb') as fp:
+    # with open('media/models/model_rf.sav', 'rb') as fp:
+    with open('media/models/model_rf_64.sav', 'rb') as fp:
         model = pickle.load(fp)
-    with open('media/models/label_coder.sav', 'rb') as fp:
+    # with open('media/models/label_coder.sav', 'rb') as fp:
+    with open('media/models/label_coder_64.sav', 'rb') as fp:
         label_coder = pickle.load(fp)
     ls = []
     threshold = 15
