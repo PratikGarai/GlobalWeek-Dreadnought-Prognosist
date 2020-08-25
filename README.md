@@ -1,4 +1,10 @@
 # GlobalWeek-Hackathon-Dreadnought
+
+<h2> Prognosist </h2>
+<hr>
+A Django webapp to accept the symptoms of a user and present a probabilistic prognosis of diseases. This webapp also has a Doctor's login and registration through their MCI details to unlock the feauture of reporting new diseases and their related symtoms.  
+
+<hr>
 Our project for DeveloperWeek 2020 Global Hackathon
 
 Packages to install (to be updated by collaborators who install something extra):<br>
